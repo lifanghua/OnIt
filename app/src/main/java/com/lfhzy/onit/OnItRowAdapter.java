@@ -44,7 +44,7 @@ public class OnItRowAdapter extends ArrayAdapter<OnItRowData> {
         toTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "tmp", Toast.LENGTH_LONG);
+                Toast.makeText(context, rowItem.getTitle(), Toast.LENGTH_LONG).show();
             }
         });
 
