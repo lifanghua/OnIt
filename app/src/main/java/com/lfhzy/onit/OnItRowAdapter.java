@@ -54,7 +54,7 @@ public class OnItRowAdapter extends ArrayAdapter<OnItRowData> {
                 rowItems.remove(rowItem);
                 rowItems.add(0, rowItem);
                 OnItRowAdapter.this.notifyDataSetChanged();
-                updateNotification(position);
+                updateNotification(rowItem, position);
             }
         });
 
@@ -64,32 +64,19 @@ public class OnItRowAdapter extends ArrayAdapter<OnItRowData> {
         return convertView;
     }
 
-    private void updateNotification(int position) {
+    private void updateNotification(OnItRowData rowData, int position) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("My notification" + position)
-                        .setContentText("Hello World!" + position)
+                        .setContentTitle("My notification" + rowData.getTitle())
+                        .setContentText(rowData.getTitle())
                         .setOngoing(true)
                         .setPriority(NotificationCompat.PRIORITY_HIGH);
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, MainActivity.class);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        // The stack builder object will contain an artificial back stack for the
-        // started Activity.
-        // This ensures that navigating backward from the Activity leads out of
-        // your application to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(MainActivity.class);
-        // Adds the Intent that starts the Activity to the top of the stack
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(
+                context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
 
         NotificationManager mNotificationManager =
