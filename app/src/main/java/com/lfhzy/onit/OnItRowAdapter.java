@@ -4,20 +4,18 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,13 +24,12 @@ import java.util.List;
 public class OnItRowAdapter extends ArrayAdapter<OnItRowData> {
 
     private final Context context;
-    private final ArrayList<OnItRowData> rowItems;
+    private final List<OnItRowData> rowItems;
 
-    public OnItRowAdapter(Context context, OnItRowData[] rowItems) {
+    public OnItRowAdapter(Context context, List<OnItRowData> rowItems) {
         super(context, R.layout.onit_row, rowItems);
         this.context = context;
-        this.rowItems = new ArrayList<>();
-        Collections.addAll(this.rowItems, rowItems);
+        this.rowItems = rowItems;
     }
 
     @Override
@@ -43,9 +40,10 @@ public class OnItRowAdapter extends ArrayAdapter<OnItRowData> {
             convertView = inflater.inflate(R.layout.onit_row, parent, false);
         }
 
+        final OnItRowData rowItem = rowItems.get(position);
+
         final TextView rowTitle = (TextView) convertView.findViewById(R.id.rowTitle);
         ImageButton toTop = (ImageButton) convertView.findViewById(R.id.toTop);
-        final OnItRowData rowItem = rowItems.get(position);
 
         toTop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,9 +55,6 @@ public class OnItRowAdapter extends ArrayAdapter<OnItRowData> {
                 updateNotification(rowItem, position);
             }
         });
-
-
-        rowTitle.setText(rowItem.getTitle());
 
         return convertView;
     }

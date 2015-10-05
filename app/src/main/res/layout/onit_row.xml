@@ -6,12 +6,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new item"
+        android:text=""
         android:id="@+id/rowTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:singleLine="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -22,4 +23,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="100dp"
         android:src="@drawable/to_top" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toEdit"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/to_edit" />
 </RelativeLayout>

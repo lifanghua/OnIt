@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">OnIt</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_edit">EditActivity</string>
+    <string name="edit_title">Title</string>
+    <string name="edit_title_hint">Enter task title here</string>
+    <string name="edit_save">Save</string>
 </resources>
